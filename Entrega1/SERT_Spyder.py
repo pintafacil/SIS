@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #%%
-board = Arduino('COM5')
+board = Arduino('COM3')
 
 iterator = util.Iterator(board)
 iterator.start()
@@ -33,13 +33,13 @@ def T2():
 
 #%% Resposta ao degrau
 Ts = 1 # período de amostragem
-tf = 60.0 # tempo final (10) - 400.0
+tf = 600.0 # tempo final (10) - 400.0
 n = int(np.round(tf/Ts+1)) # número de amostras
 temp1 = np.zeros(n) # temperatura S1
 temp2 = np.zeros(n) # temperatura S2
 t = np.linspace(0,n-1,n)*Ts # tempo
-u_s1 = 0 # 50% PWM - alternar com o u_s2 - quando é 0 os valores do sensor S1 não são considerádos
-u_s2 = 0.5   # 50% PWM - alternar com o u_s1 - quando é 0 os valores do sensor S2 não são considerádos
+u_s1 = 0.5 # 50% PWM - alternar com o u_s2 - quando é 0 os valores do sensor S1 não são considerádos
+u_s2 = 0   # 50% PWM - alternar com o u_s1 - quando é 0 os valores do sensor S2 não são considerádos
 # Entrada de controlo
 u1 = np.ones(n)*u_s1
 u2 = np.ones(n)*u_s2
