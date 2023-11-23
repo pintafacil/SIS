@@ -32,8 +32,8 @@ def T2():
     return TEMP(T_S2.read())
 
 #%% Resposta ao degrau
-Ts = 1 # período de amostragem
-tf = 600.0 # tempo final (10) - 400.0
+Ts = 0.5 # período de amostragem
+tf = 50 # tempo final (10) - 400.0
 n = int(np.round(tf/Ts+1)) # número de amostras
 temp1 = np.zeros(n) # temperatura S1
 temp2 = np.zeros(n) # temperatura S2
@@ -62,40 +62,4 @@ board.exit() # termina comunicação com placa
 #%% Guardar dados
 
 dados = np.vstack((t,temp1,temp2)).T
-np.savetxt('dados_reglinear.txt',dados,delimiter=',',\
-        header='t,u,T1',comments='')
-
-
-
-#%% Gráficos
-if u_s1!=0:
-    plt.figure()
-    ax = plt.subplot(2,1,1)
-    ax.grid()
-    plt.plot(t,temp1,'k-',label='T1')
-    plt.ylabel('Temperatura ($^oC$)')
-    plt.legend(loc='best')
-    ax = plt.subplot(2,1,2)
-    ax.grid()
-    plt.plot(t,u1,'b-',label='u')
-    plt.ylabel('Controlo (%)')
-    plt.xlabel('tempo (s)')
-    plt.legend()
-    plt.savefig('degrau_S1.png')
-    plt.show()
-
-if u_s2!=0:
-    plt.figure()
-    ax = plt.subplot(2,1,1)
-    ax.grid()
-    plt.plot(t,temp2,'k-',label='T2')
-    plt.ylabel('Temperatura ($^oC$)')
-    plt.legend(loc='best')
-    ax = plt.subplot(2,1,2)
-    ax.grid()
-    plt.plot(t,u2,'b-',label='u')
-    plt.ylabel('Controlo (%)')
-    plt.xlabel('tempo (s)')
-    plt.legend()
-    plt.savefig('degrau_S2.png')
-    plt.show()
+np.savetxt('dados_reglinear.txt',dados,delimiter=',')
